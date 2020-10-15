@@ -1,76 +1,75 @@
 #include <iostream>
 #include <regex>
 #include <string>
+#include <string_view>
 #include <cstring>
+#include <locale>
 
 using namespace std;
 
 //13478ts13478ststsebastiansebastian - 34 - Valido
 
-int main(){
-    regex e("13478(ts)+13478(st)+sebastiansebastian");
-    int cont1 = 0, cont2 = 0, i = 0;
-    std::string str, c;
-    do{
-        cout << "Ingrese una cadena de caracteres: ";
-        fflush(stdin);
-        getline(cin, str);
-        fflush(stdin);
-        bool match = regex_match(str, e);
-    
-        char *cstr = new char[str.size() + 1];
-        str.copy(cstr, str.size() + 1);
-        cstr[str.size()] = '\0';
-        int j = str.size();
+string readString() {
+    string str;
+    cout << "Ingrese una cadena de caracteres: ";
+    fflush(stdin);
+    getline(cin, str);
+    fflush(stdin);
+    return str;
+}
 
-        if (match == true){
-            for (i = 5; i < j; i=i+2) {
-                if (cstr[i + 2] == '1') {
-                    cont1++;
-                    break;
-                }else{
-                    cont1++;
-                }
-            }
-            for (i = (cont1*2) + 10; i < j; i = i + 2) {
-                cout << "i=" << i << endl;
-                if (cstr[i + 3] == 'e') {
-                    cont2++;
-                    break;
-                }else {
-                    cont2++;
-                }
-            }
-        
-            if ((cont1 * 2) != cont2) 
-                cout << "Caso Invalido" << endl << endl;
-            else 
-                cout << "Caso Valido" << endl << endl;
-        
-        }else{
-            cout << "Caso Invalido" << endl << endl;
+int countRange(const string_view substr, const string str, const int start, const int end) {
+    int count = -1;
+    int pos = start - 1;
+    do {
+        pos = str.find(substr, pos + 1);
+        count++;
+    } while (pos != -1 && pos < end);
+    return count;
+}
+
+int main(){
+    setlocale(LC_ALL, "");
+    regex e("13478(ts)+13478(st)+sebastiansebastian");
+    int count1 = 0, count2 = 0;
+    std::string str, cont_exec;
+    bool valid = false;
+    do {
+        valid = false;
+        str = readString();
+        bool match = regex_match(str, e);
+
+        if ( match ) {
+            int pos = 0;
+            int end_1 = str.find("13478"sv, 5);
+            int end_2 = str.find("sebastiansebastian"sv, 5);
+            
+
+            count1 = countRange("ts"sv, str, 0, end_1);
+            count2 = countRange("st"sv, str, end_1, end_2);
+           
+            valid = 2 * count1 == count2;
+        } 
+
+        if ( valid ) {
+            cout << "Caso Valido"sv << endl << endl;
+        } else {
+            cout << "Caso Invalido"sv << endl << endl;
         }
+
         do {
             cout.flush();
-            cout << "¿Desea introducir otra cadena? [S/N]" << endl;
+            cout << "¿Desea introducir otra cadena? [S/N]"sv << endl;
             fflush(stdin);
-            getline(cin, c);
-            c[0] = toupper(c[0]);
-            if (c != "S" && c != "N") {
-                cout << "Por favor, ingrese una respuesta valida" << endl << endl;
+            getline(cin, cont_exec);
+            cont_exec[0] = toupper(cont_exec[0]);
+            if (cont_exec != "S" && cont_exec != "N") {
+                cout << "Por favor, ingrese una respuesta valida"sv << endl << endl;
             }
-        }while (c != "S" && c != "N");
+        } while (cont_exec != "S" && cont_exec != "N");
 
-    } while (c == "S");
+    } while (cont_exec == "S");
     
     return 0;
 }
-
-/*
-        cout << endl << j << endl;
-        cout << endl << i << endl;
-        cout << endl << cont1 << endl;
-        cout << endl << cont2 << endl;
-*/
-
 
