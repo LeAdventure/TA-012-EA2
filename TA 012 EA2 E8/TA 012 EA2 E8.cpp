@@ -2,22 +2,52 @@
 #include <regex>
 #include <string>
 #include <cstring>
-
+#include <thread> 
+#include <chrono>
+#include <locale.h>
 using namespace std;
 
 //13478ts13478ststsebastiansebastian - 34 - Valido
+//13478tsts13478ststsebastiansebastian - Invalido - No cumple (w)^(n)
+//13478tsts13478stststsebastiansebastian - Invalido - No cumple (w^(-1))^(2n)
+//13478tsts13478ststststsebastiansebastian - Valido 
+//13478tstststststststststs13478ststststststststststststststststststststsebastiansebastian - Valido
 
 int main(){
-    regex e("13478(ts)+13478(st)+sebastiansebastian");
+    setlocale(LC_ALL, "");
+    regex e("13478(ts)+13478(st)+sebastiansebastian"); //Validor
     int cont1 = 0, cont2 = 0, i = 0;
     std::string str, c;
+
+    cout << "Tarea - 1" << endl;
+    cout << "Miembros: " << endl;
+    cout << "Jose Maria Flores San Martin\t\t -\t1859565" << endl;
+    cout << "Miguel Eduardo Barragan Elizondo\t -\t1859404" << endl;
+    cout << "Sebastian Terrazas Santillana\t\t -\t1847317" << endl;
+    for (int i = 4; i > 0; --i) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+    system("cls");
+    fflush(stdin);
+
     do{
+        system("cls");
+        cout << "Nombre usado: Sebastian Terrazas Santillana \tMatricula: 1847317" << endl;
+        cout << "i = 13478" << endl;
+        cout << "j = sebastian" << endl;
+        cout << "w = ts" << endl;
+        cout << "w^(-1) = st" << endl << endl;
+
+        cout << "L = { i(w)^(n)i(w^(-1))^(2n)(j)^(2) donde n>=1}" << endl;
+        cout << "Ejemplo mas basico - 13478ts13478ststsebastiansebastian" << endl << endl;
+
         cout << "Ingrese una cadena de caracteres: ";
         fflush(stdin);
         getline(cin, str);
         fflush(stdin);
-        bool match = regex_match(str, e);
+        bool match = regex_match(str, e); //Validacion 
     
+        //Poner la string en un array char
         char *cstr = new char[str.size() + 1];
         str.copy(cstr, str.size() + 1);
         cstr[str.size()] = '\0';
@@ -33,7 +63,6 @@ int main(){
                 }
             }
             for (i = (cont1*2) + 10; i < j; i = i + 2) {
-                cout << "i=" << i << endl;
                 if (cstr[i + 3] == 'e') {
                     cont2++;
                     break;
@@ -41,12 +70,10 @@ int main(){
                     cont2++;
                 }
             }
-        
             if ((cont1 * 2) != cont2) 
                 cout << "Caso Invalido" << endl << endl;
             else 
                 cout << "Caso Valido" << endl << endl;
-        
         }else{
             cout << "Caso Invalido" << endl << endl;
         }
@@ -60,17 +87,8 @@ int main(){
                 cout << "Por favor, ingrese una respuesta valida" << endl << endl;
             }
         }while (c != "S" && c != "N");
-
+        cont1 = 0, cont2 = 0;
     } while (c == "S");
     
     return 0;
 }
-
-/*
-        cout << endl << j << endl;
-        cout << endl << i << endl;
-        cout << endl << cont1 << endl;
-        cout << endl << cont2 << endl;
-*/
-
-
