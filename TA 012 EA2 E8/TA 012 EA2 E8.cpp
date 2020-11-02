@@ -7,19 +7,20 @@
 #include <locale.h>
 using namespace std;
 
-//13478ts13478ststsebastiansebastian - 34 - Valido
-//13478tsts13478ststsebastiansebastian - Invalido - No cumple (w)^(n)
-//13478tsts13478stststsebastiansebastian - Invalido - No cumple (w^(-1))^(2n)
-//13478tsts13478ststststsebastiansebastian - Valido 
-//13478tstststststststststs13478ststststststststststststststststststststsebastiansebastian - Valido
+//1847317ts1847317ststsebastiansebastian - Valido
+//1847317tsts1847317ststsebastiansebastian - Invalido - No cumple (w)^(n)
+//1847317tsts1847317stststsebastiansebastian - Invalido - No cumple (w^(-1))^(2n)
+//1847317tsts1847317ststststsebastiansebastian - Valido 
+//1847317tstststststststststs1847317ststststststststststststststststststststsebastiansebastian - Valido
+//1847317ts1847317ststsebastian - Invalido Falta una i
 
 int main(){
     setlocale(LC_ALL, "");
-    regex e("13478(ts)+13478(st)+sebastiansebastian"); //Validor
+    regex e("1847317(ts)+1847317(st)+sebastiansebastian"); //Validor
     int cont1 = 0, cont2 = 0, i = 0;
-    std::string str, c;
+    string str, c;
 
-    cout << "Tarea - 1" << endl;
+    cout << "Tarea - 2" << endl;
     cout << "Miembros: " << endl;
     cout << "Jose Maria Flores San Martin\t\t -\t1859565" << endl;
     cout << "Miguel Eduardo Barragan Elizondo\t -\t1859404" << endl;
@@ -33,13 +34,13 @@ int main(){
     do{
         system("cls");
         cout << "Nombre usado: Sebastian Terrazas Santillana \tMatricula: 1847317" << endl;
-        cout << "i = 13478" << endl;
+        cout << "i = 1847317" << endl;
         cout << "j = sebastian" << endl;
         cout << "w = ts" << endl;
         cout << "w^(-1) = st" << endl << endl;
 
         cout << "L = { i(w)^(n)i(w^(-1))^(2n)(j)^(2) donde n>=1}" << endl;
-        cout << "Ejemplo mas basico - 13478ts13478ststsebastiansebastian" << endl << endl;
+        cout << "Ejemplo mas basico - 1847317ts1847317ststsebastiansebastian" << endl << endl;
 
         cout << "Ingrese una cadena de caracteres: ";
         fflush(stdin);
@@ -54,7 +55,7 @@ int main(){
         int j = str.size();
 
         if (match == true){
-            for (i = 5; i < j; i=i+2) {
+            for (i = 7; i < j; i=i+2) {
                 if (cstr[i + 2] == '1') {
                     cont1++;
                     break;
@@ -62,7 +63,7 @@ int main(){
                     cont1++;
                 }
             }
-            for (i = (cont1*2) + 10; i < j; i = i + 2) {
+            for (i = (cont1*2) + 14; i < j; i = i + 2) {
                 if (cstr[i + 3] == 'e') {
                     cont2++;
                     break;
