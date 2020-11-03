@@ -90,6 +90,7 @@ int main(){
         }while (c != "S" && c != "N");
         cont1 = 0, cont2 = 0;
     } while (c == "S");
-    
+    cout << "Gracias por usar el programa." << endl;
+    getchar();
     return 0;
 }
